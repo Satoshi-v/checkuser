@@ -1,10 +1,10 @@
-Um simples check de usuario feito em python que funciona com varios aplicativos, mas seja compreensivo, script em testes ! 
+Un simple Checkuser realizado en Python que funciona con varias aplicaciones.  
 
-para fazer a instalação rode o seguinte comando !
+Para instalar, ejecute el siguiente comando!
 
 ```bash <(wget -qO- https://raw.githubusercontent.com/Satoshi-v/checkuser/main/install.sh)```
 
 
-Creado por @UlekBR y mejorado por @Net_Satoshi
+Creado por @Net_Satoshi, mejorado para WEBCONT.
 
 Para iniciar el menu checkuser: ```iniciar```
