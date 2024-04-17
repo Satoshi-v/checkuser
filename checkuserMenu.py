@@ -48,13 +48,13 @@ def get_public_ip():
             if 'ip' in data:
                 return data['ip']
             else:
-                print("Endereço IP público não encontrado na resposta.")
+                print("Dirección IP pública no encontrada en la respuesta.")
                 return None
         else:
-            print("Falha na solicitação ao servidor.")
+            print("La solicitud al servidor falló.")
             return None
     except Exception as e:
-        print("Não foi possível obter o endereço IP público:", str(e))
+        print("No se puede obtener la dirección IP pública:", str(e))
         return None
 
 
@@ -68,7 +68,7 @@ def verificar_processo(nome_processo):
             if nome_processo in linha and "python" in linha:
                 return True
     except subprocess.CalledProcessError as e:
-        print(f"Erro ao verificar o processo: {e}")
+        print(f"Proceso de verificación de errores: {e}")
     return False
 
 
@@ -83,9 +83,9 @@ if __name__ == "__main__":
 
 
         if verificar_processo(nome_do_script):
-            status = f'{cor_verde}ativo{cor_reset} - {cor_amarela}porta em uso : {cor_reset}{cor_vermelha}{obter_do_cache("porta")}{cor_reset}'
+            status = f'{cor_verde}activo{cor_reset} - {cor_amarela}puerto en uso : {cor_reset}{cor_vermelha}{obter_do_cache("porta")}{cor_reset}'
         else:
-            status = f'{cor_vermelha}parado{cor_reset} - {cor_amarela}porta em uso : {cor_reset}{cor_vermelha}{obter_do_cache("porta")}{cor_reset}'
+            status = f'{cor_vermelha}parado{cor_reset} - {cor_amarela}puerto en uso : {cor_reset}{cor_vermelha}{obter_do_cache("porta")}{cor_reset}'
        
         print(f"{cor_amarela}Status: {status}{cor_reset}")
 
@@ -95,13 +95,13 @@ if __name__ == "__main__":
         print(f" {cor_verde} 1 - Cerrar puerto 5454{cor_reset}")
         print(f" {cor_verde} 2 - Iniciar checkuser{cor_reset}")
         print(f" {cor_verde} 3 - Detener checkuser{cor_reset}")
-        print(f" {cor_verde} 4 - Obtener enlace{cor_reset}")
+        print(f" {cor_verde} 4 - Obtener enlaces{cor_reset}")
         print(f" {cor_verde} 5 - Sobre{cor_reset}")
         print(f" {cor_vermelha} 0 - Salir del menu{cor_reset}")
         print("")
 
         
-        print(f" {cor_amarela} Digite a opção : {cor_reset}")
+        print(f" {cor_amarela} Digite una opcion : {cor_reset}")
         option = input()
 
 
@@ -111,25 +111,25 @@ if __name__ == "__main__":
 
         if option == "1":
 
-            print(f"\n {cor_vermelha} Porta 5454 liberada, volte ao menu e inicie o checkUser na porta 5454 {cor_reset}")
+            print(f"\n {cor_vermelha} Puerto 5454 liberado, regrese al menú e inicie checkUser en el puerto 5454 {cor_reset}")
             
             command = "sudo kill -9 $(lsof -t -i:5454)"
             subprocess.run(command, shell=True)
             
-            print(f"{cor_vermelha}\nPressione a tecla enter para voltar ao menu\n{cor_reset}")
+            print(f"{cor_vermelha}\nPresione la tecla Enter para regresar al menú.\n{cor_reset}")
             input()  # A linha de input sem mensagem irá para a linha abaixo do print
         elif option == "2":
 
-            print(f" {cor_vermelha} Observação: Para funcionar com security use a porta 5454 ! {cor_reset}")
+            print(f" {cor_vermelha} Nota: Para trabajar de forma segura, utilice el puerto 5454 ! {cor_reset}")
             
-            adicionar_ao_cache('porta', input("\n Digite a porta que deseja usar e de enter : "))
+            adicionar_ao_cache('porta', input("\n Escriba el puerto que desea utilizar y presione enter : "))
 
             os.system('clear')
             print(f'Porta escolhida: {obter_do_cache("porta")}')
 
             os.system(f'nohup python3 {nome_do_script} --port {obter_do_cache("porta")} & ')
 
-            print(f"\n {cor_vermelha} Pressione a tecla enter para voltar ao menu\n\n {cor_reset}")
+            print(f"\n {cor_vermelha} Presione la tecla Enter para regresar al menú.\n\n {cor_reset}")
             input()
         elif option == "3":
             if verificar_processo(nome_do_script):
@@ -139,73 +139,73 @@ if __name__ == "__main__":
 
                         
                 except subprocess.CalledProcessError:
-                    print("Erro ao executar o comando.")
+                    print("Error al ejecutar el comando.")
                 remover_do_cache("porta")
             else: 
-                print(" {cor_vermelha} O Checkuser não está ativo.{cor_reset}")
+                print(" {cor_vermelha} El Checkuser no está activo.{cor_reset}")
             
 
 
-            input(f" {cor_vermelha} Pressione a tecla enter para voltar ao menu {cor_reset}")
+            input(f" {cor_vermelha} Presione la tecla Enter para regresar al menú. {cor_reset}")
         elif option == "4":
             os.system('clear')
             if verificar_processo(nome_do_script):
-                print(f" {cor_vermelha} Abaixo os apps, e os links para cada um : {cor_reset}")
+                print(f" {cor_vermelha} Abajo las apps, y los link para cada una : {cor_reset}")
                 print("")
                 ip = get_public_ip()
                 porta = obter_do_cache("porta")
-                print(f" {cor_amarela} Conecta4G/5G - http://{ip}:{porta}/checkUser{cor_reset} ")
-                print(f" {cor_amarela} DtunnelMod - http://{ip}:{porta}/dtmod{cor_reset}  ")
-                print(f" {cor_amarela} GltunnelMod - http://{ip}:{porta}/gl{cor_reset} ")
-                print(f" {cor_amarela} AnyVpnMod - http://{ip}:{porta}/anymod{cor_reset} ")
-                print(f" {cor_amarela} AtxTunnel - http://{ip}:{porta}/atx{cor_reset} ")
+                print(f" {cor_amarela} SPEED-X - http://{ip}:{porta}/checkUser{cor_reset} ")
+                print(f" {cor_amarela} Dt - http://{ip}:{porta}/dtmod{cor_reset}  ")
+                print(f" {cor_amarela} Gl - http://{ip}:{porta}/gl{cor_reset} ")
+                print(f" {cor_amarela} Any - http://{ip}:{porta}/anymod{cor_reset} ")
+                print(f" {cor_amarela} AtxT - http://{ip}:{porta}/atx{cor_reset} ")
                 print("")
 
-                print(f" {cor_vermelha} Para usar com security (por favor, use apenas esses links com security e conexões que não usam cloudflare para não sobrecarregar nossos servidores){cor_reset}")
+                print(f" {cor_vermelha} Para usar de forma segura (utilice únicamente estos enlaces en las apps correspondientes){cor_reset}")
                 print("")
-                print(f" {cor_amarela}Link Conecta4G/5G abaixo :{cor_reset} ")
+                print(f" {cor_amarela}Link SPEED-X abajo👇 :{cor_reset} ")
                 print("")
                 print(f"  {cor_verde}https://terraatualizada.com/checkuser.php?url=http://{ip}:{porta}/checkUser{cor_reset} ")
                 print("")
-                print(f" {cor_amarela}Link DtunnelMod abaixo :{cor_reset} ")
+                print(f" {cor_amarela}Link Dt abajo👇 :{cor_reset} ")
                 print("")
                 print(f"  {cor_verde}https://terraatualizada.com/checkuser.php?url=http://{ip}:{porta}/dtmod{cor_reset}  ")
                 print("")
-                print(f" {cor_amarela}Link GltunnelMod abaixo :{cor_reset} ")
+                print(f" {cor_amarela}Link GL abajo👇 :{cor_reset} ")
                 print("")
                 print(f"  {cor_verde}https://terraatualizada.com/checkuser.php?url=http://{ip}:{porta}/gl{cor_reset} ")
                 print("")
-                print(f" {cor_amarela}Link AnyVpnMod abaixo :{cor_reset} ")
+                print(f" {cor_amarela}Link Any abajo👇 :{cor_reset} ")
                 print("")
                 print(f"  {cor_verde}https://terraatualizada.com/checkuser.php?url=http://{ip}:{porta}/anymod{cor_reset} ")
                 print("")
-                print(f" {cor_amarela}Link AtxTunnel abaixo :{cor_reset} ")
+                print(f" {cor_amarela}Link AtxT abajo👇 :{cor_reset} ")
                 print("")
                 print(f"  {cor_verde}https://terraatualizada.com/checkuser.php?url=http://{ip}:{porta}/atx{cor_reset} ")
                 print("")
-                input(f" {cor_vermelha} Pressione a tecla enter para voltar ao menu {cor_reset}")
+                input(f" {cor_vermelha} Presione la tecla Enter para regresar al menú. {cor_reset}")
 
             else:
-                print("\nInicie o serviço primeiro\n")
-                print(f"\n {cor_vermelha} Pressione a tecla enter para voltar ao menu\n\n {cor_reset}")
+                print("\nInicie el servicio primero\n")
+                print(f"\n {cor_vermelha} Presione la tecla Enter para regresar al menú.\n\n {cor_reset}")
             input()
                   
 
         elif option == "5":
             os.system('clear')
-            print(f"{cor_amarela}Hola!, este es un multi-checkuser creado por : {cor_reset}{cor_vermelha}@UlekBR{cor_reset}{cor_amarela} y mejorado por : {cor_reset} {cor_vermelha}\n@Net_Satoshi{cor_reset}")
-            print(f"{cor_amarela} Con este checkuser venho trazendo a possibilidade de usar em diversos apps{cor_reset}")
+            print(f"{cor_amarela}Hola!, este es un multi-checkuser creado por : {cor_reset}{cor_vermelha}@Net_Satoshi{cor_reset}{cor_amarela} y mejorado para  {cor_reset} {cor_vermelha}\nWEBCONT{cor_reset}")
+            print(f"{cor_amarela} Con este checkuser tiene la posibilidad de usarlo en diferentes apps {cor_reset}")
             print(f"{cor_vermelha} Apps como : {cor_reset}")
-            print(f" - Conecta4G/5G")
-            print(f" - DtunnelMod")
-            print(f" - GlTunnelMod")
-            print(f" - AnyVpnMod")
+            print(f" - SPEED-X")
+            print(f" - DT")
+            print(f" - GL")
+            print(f" - ANY")
             print(f"")
-            print(f"{cor_vermelha} Pressione a tecla enter para voltar ao menu {cor_reset}")
+            print(f"{cor_vermelha} Presione la tecla Enter para regresar al menú. {cor_reset}")
             input()
         elif option == "0":
             sys.exit(0)
         else:
             os.system('clear')
-            print(f"Selecionado uma opção invalida, tente novamente !")
-            input(f"Pressione a tecla enter para voltar ao menu")
+            print(f"Si se selecciona una opción no válida, inténtelo de nuevo !")
+            input(f"Presione la tecla Enter para regresar al menú.")
